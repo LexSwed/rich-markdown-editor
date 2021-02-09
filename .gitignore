@@ -3,3 +3,6 @@ node_modules/*
 .log
 .DS_Store
 .idea
+example/dist
+example/dist-ssr
+example/*.local

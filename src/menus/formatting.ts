@@ -1,113 +1,77 @@
-import {
-  BoldIcon,
-  CodeIcon,
-  Heading1Icon,
-  Heading2Icon,
-  ItalicIcon,
-  BlockQuoteIcon,
-  LinkIcon,
-  StrikethroughIcon,
-  InputIcon,
-  HighlightIcon,
-} from "outline-icons";
-import { isInTable } from "prosemirror-tables";
-import { EditorState } from "prosemirror-state";
-import isInList from "../queries/isInList";
-import isMarkActive from "../queries/isMarkActive";
-import isNodeActive from "../queries/isNodeActive";
-import { MenuItem } from "../types";
-import baseDictionary from "../dictionary";
+import type { EditorState } from 'prosemirror-state'
+import isInList from '../queries/isInList'
+import isMarkActive from '../queries/isMarkActive'
+import type { MenuItem } from '../types'
+import type baseDictionary from '../dictionary'
+import { AiOutlineBold, AiOutlineItalic, AiOutlineStrikethrough } from 'react-icons/ai'
+import { HiOutlineCode, HiOutlineLink, HiOutlinePencil } from 'react-icons/hi'
 
 export default function formattingMenuItems(
   state: EditorState,
   isTemplate: boolean,
   dictionary: typeof baseDictionary
 ): MenuItem[] {
-  const { schema } = state;
-  const isTable = isInTable(state);
-  const isList = isInList(state);
-  const allowBlocks = !isTable && !isList;
+  const { schema } = state
+  const isTable = isInTable(state)
+  const isList = isInList(state)
+  const allowBlocks = !isList
 
   return [
     {
-      name: "placeholder",
+      name: 'placeholder',
       tooltip: dictionary.placeholder,
-      icon: InputIcon,
+      icon: HiOutlinePencil,
       active: isMarkActive(schema.marks.placeholder),
       visible: isTemplate,
     },
     {
-      name: "separator",
+      name: 'separator',
       visible: isTemplate,
     },
     {
-      name: "strong",
+      name: 'strong',
       tooltip: dictionary.strong,
-      icon: BoldIcon,
+      icon: AiOutlineBold,
       active: isMarkActive(schema.marks.strong),
     },
     {
-      name: "em",
+      name: 'em',
       tooltip: dictionary.em,
-      icon: ItalicIcon,
+      icon: AiOutlineItalic,
       active: isMarkActive(schema.marks.em),
     },
     {
-      name: "strikethrough",
+      name: 'strikethrough',
       tooltip: dictionary.strikethrough,
-      icon: StrikethroughIcon,
+      icon: AiOutlineStrikethrough,
       active: isMarkActive(schema.marks.strikethrough),
     },
     {
-      name: "mark",
+      name: 'mark',
       tooltip: dictionary.mark,
-      icon: HighlightIcon,
+      icon: HiOutlinePencil,
       active: isMarkActive(schema.marks.mark),
       visible: !isTemplate,
     },
     {
-      name: "code_inline",
+      name: 'code_inline',
       tooltip: dictionary.codeInline,
-      icon: CodeIcon,
+      icon: HiOutlineCode,
       active: isMarkActive(schema.marks.code_inline),
     },
     {
-      name: "separator",
+      name: 'separator',
       visible: allowBlocks,
     },
     {
-      name: "heading",
-      tooltip: dictionary.heading,
-      icon: Heading1Icon,
-      active: isNodeActive(schema.nodes.heading, { level: 1 }),
-      attrs: { level: 1 },
-      visible: allowBlocks,
+      name: 'separator',
     },
     {
-      name: "heading",
-      tooltip: dictionary.subheading,
-      icon: Heading2Icon,
-      active: isNodeActive(schema.nodes.heading, { level: 2 }),
-      attrs: { level: 2 },
-      visible: allowBlocks,
-    },
-    {
-      name: "blockquote",
-      tooltip: dictionary.quote,
-      icon: BlockQuoteIcon,
-      active: isNodeActive(schema.nodes.blockquote),
-      attrs: { level: 2 },
-      visible: allowBlocks,
-    },
-    {
-      name: "separator",
-    },
-    {
-      name: "link",
+      name: 'link',
       tooltip: dictionary.createLink,
-      icon: LinkIcon,
+      icon: HiOutlineLink,
       active: isMarkActive(schema.marks.link),
-      attrs: { href: "" },
+      attrs: { href: '' },
     },
-  ];
+  ]
 }

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { EditorState } from "prosemirror-state";
+import type { Component, FC } from "react";
+import type { EditorState } from "prosemirror-state";
 
 export enum ToastType {
   Error = "error",
@@ -7,7 +7,7 @@ export enum ToastType {
 }
 
 export type MenuItem = {
-  icon?: typeof React.Component | React.FC<any>;
+  icon?: typeof Component | FC<any>;
   name?: string;
   title?: string;
   shortcut?: string;
@@ -20,5 +20,5 @@ export type MenuItem = {
 
 export type EmbedDescriptor = MenuItem & {
   matcher: (url: string) => boolean | [];
-  component: typeof React.Component | React.FC<any>;
+  component: typeof Component | FC<any>;
 };

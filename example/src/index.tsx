@@ -3,7 +3,7 @@ import debounce from "lodash/debounce";
 import ReactDOM from "react-dom";
 import Editor from "../../src";
 
-const element = document.getElementById("main");
+const element = document.getElementById("root");
 const savedText = localStorage.getItem("saved");
 const exampleText = `
 # Welcome

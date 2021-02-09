@@ -1,29 +1,27 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "strict": false,
-    "strictNullChecks": true,
-    "noImplicitAny": false,
+    "strict": true,
     "esModuleInterop": true,
+    "types": ["react"],
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "useDefineForClassFields": true,
+    "lib": ["dom", "esnext"],
     "allowJs": true,
-    "module": "commonjs",
-    "target": "es2017",
-    "jsx": "react",
-    "types": [
-      "react"
-    ],
-    "rootDir": "src",
-    "outDir": "dist",
-    "stripInternal": true,
-    "removeComments": true,
-    "declarationMap": true,
+    "noEmit": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "isolatedModules": true,
+    "module": "esnext",
+    "target": "esnext",
     "declaration": true,
+    "strictFunctionTypes": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"]
 }

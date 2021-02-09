@@ -1,61 +1,51 @@
-import {
-  TrashIcon,
-  AlignImageLeftIcon,
-  AlignImageRightIcon,
-  AlignImageCenterIcon,
-} from "outline-icons";
-import isNodeActive from "../queries/isNodeActive";
-import { MenuItem } from "../types";
-import baseDictionary from "../dictionary";
-import { EditorState } from "prosemirror-state";
+import isNodeActive from '../queries/isNodeActive'
+import type { MenuItem } from '../types'
+import type baseDictionary from '../dictionary'
+import type { EditorState } from 'prosemirror-state'
+import { AiOutlineAlignCenter, AiOutlineAlignLeft, AiOutlineAlignRight } from 'react-icons/ai'
+import { HiOutlineTrash } from 'react-icons/hi'
 
-export default function imageMenuItems(
-  state: EditorState,
-  dictionary: typeof baseDictionary
-): MenuItem[] {
-  const { schema } = state;
+export default function imageMenuItems(state: EditorState, dictionary: typeof baseDictionary): MenuItem[] {
+  const { schema } = state
   const isLeftAligned = isNodeActive(schema.nodes.image, {
-    layoutClass: "left-50",
-  });
+    layoutClass: 'left-50',
+  })
   const isRightAligned = isNodeActive(schema.nodes.image, {
-    layoutClass: "right-50",
-  });
+    layoutClass: 'right-50',
+  })
 
   return [
     {
-      name: "alignLeft",
+      name: 'alignLeft',
       tooltip: dictionary.alignLeft,
-      icon: AlignImageLeftIcon,
+      icon: AiOutlineAlignLeft,
       visible: true,
       active: isLeftAligned,
     },
     {
-      name: "alignCenter",
+      name: 'alignCenter',
       tooltip: dictionary.alignCenter,
-      icon: AlignImageCenterIcon,
+      icon: AiOutlineAlignCenter,
       visible: true,
-      active: state =>
-        isNodeActive(schema.nodes.image)(state) &&
-        !isLeftAligned(state) &&
-        !isRightAligned(state),
+      active: (state) => isNodeActive(schema.nodes.image)(state) && !isLeftAligned(state) && !isRightAligned(state),
     },
     {
-      name: "alignRight",
+      name: 'alignRight',
       tooltip: dictionary.alignRight,
-      icon: AlignImageRightIcon,
+      icon: AiOutlineAlignRight,
       visible: true,
       active: isRightAligned,
     },
     {
-      name: "separator",
+      name: 'separator',
       visible: true,
     },
     {
-      name: "deleteImage",
+      name: 'deleteImage',
       tooltip: dictionary.deleteImage,
-      icon: TrashIcon,
+      icon: HiOutlineTrash,
       visible: true,
       active: () => false,
     },
-  ];
+  ]
 }
